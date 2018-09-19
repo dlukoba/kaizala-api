@@ -28,7 +28,7 @@ namespace saf_kaizala_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContextPool<saf_kaizala_api.Models.DatabaseContext>(options => 
+            services.AddDbContext<saf_kaizala_api.Models.DatabaseContext>(options => 
                 options.UseMySql("Server=localhost;Database=kaizala-app;User=root;Password=root;", 
                     mysqlOptions => {
                         mysqlOptions.ServerVersion(new Version(5, 7, 19), ServerType.MySql);

@@ -12,16 +12,19 @@ namespace saf_kaizala_api.Models
 
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DatabaseContext()
         {
-            modelBuilder.Entity<Customer>()
-                .ToTable("customers")
-                .HasKey(c => c.Id);
+
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
         }
+
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+            
+        // }
     }
 }

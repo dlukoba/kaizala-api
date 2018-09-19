@@ -8,12 +8,21 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using saf_kaizala_api.Models;
+
 namespace saf_kaizala_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProductRegistrationController : ControllerBase
     {
+        private readonly DatabaseContext _dbContext;
+
+        public ProductRegistrationController(DatabaseContext context)
+        {
+            _dbContext = context;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -49,6 +58,10 @@ namespace saf_kaizala_api.Controllers
                 (string)responses[2].answer,
                 (string)responses[3].answer,
                 (string)responses[4].answer.cc + (string)responses[4].answer.pn);
+
+            _dbContext.Customers.Add(customer);
+            _dbContext.SaveChanges();
+
             var senderInfo = new Models.Sender()
             {
                 Id = obj.fromUserId,
